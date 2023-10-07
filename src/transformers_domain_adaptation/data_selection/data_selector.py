@@ -24,6 +24,7 @@ class DataSelector(BaseEstimator, TransformerMixin):
 
     This class is sklearn-compatible and implements the sklearn Transformers interface.
     """
+    _last_scores : pd.DataFrame = None
 
     def __init__(
         self,
@@ -74,7 +75,11 @@ class DataSelector(BaseEstimator, TransformerMixin):
         self.tokenizer = tokenizer
         self.similarity_metrics = similarity_metrics
         self.diversity_metrics = diversity_metrics
+        self._last_scores  = None
 
+    def get_last_scores(self):
+        return self._last_scores
+    
     def to_term_dist(self, text: str) -> np.ndarray:
         if not len(text.strip()):
             raise ValueError(f"A non-empty string must be provided.")
@@ -168,6 +173,7 @@ class DataSelector(BaseEstimator, TransformerMixin):
             RobustScaler().fit_transform(scores), columns=scores.columns
         )
         scores["composite"] = scores.sum(axis=1)
+        self._last_scores = scores.copy()
         return scores
 
     def compute_similarities(self, docs: Corpus) -> pd.DataFrame:
@@ -177,7 +183,7 @@ class DataSelector(BaseEstimator, TransformerMixin):
         ):  # Short-circuit function to avoid unnecessary computations
             return similarities
 
-        term_dists = self.to_term_dist_batch(docs)
+        term_dists = np.array([self.to_term_dist(doc) for doc in docs])
 
         pbar = tqdm(
             self.similarity_metrics,

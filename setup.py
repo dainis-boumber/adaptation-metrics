@@ -9,7 +9,7 @@ with open("README.md", encoding="utf-8") as f:
 
 setup(
     name="transformers-domain-adaptation",
-    version="0.3.1",
+    version="0.3.2",
     description="Adapt Transformer-based language models to new text domains",
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
@@ -43,13 +43,17 @@ setup(
         where="src", exclude=("etl*", "utils*", "experimental*", "tests")
     ),
     install_requires=[
-        "transformers>=4,<5",
-        "tokenizers>=0.9,<0.10",
-        "datasets>=1.2,<1.3",
+        "transformers>=4.33",
+        "tokenizers>=0.9",
+        "datasets>=1.2",
         "pandas",
-        "torch>=1.7,<1.8",
+        "torch",
         "scipy==1.5.4",
         "scikit-learn",
         "tqdm",
+        "huggingface-hub",
+        "jupyter",
+        "notebook",
+        "sentencepiece",
     ],
 )
