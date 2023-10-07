@@ -1,6 +1,14 @@
 <div align="center">
 
 <h1 style="text-align:center">Transformers Domain Adaptation</h1>
+
+I will maintain and update this for us since some things are broken, like Euclidian similarity. 
+Let's try to keep it as close as possible to the original regarding API calls. 
+
+- Dainis
+  
+Whatever is under this ine is not my responsibility :)))
+
 <p align="center">
     <a href="https://transformers-domain-adaptation.readthedocs.io/en/latest/content/introduction.html">Documentation</a> •
     <a href="https://colab.research.google.com/github/georgianpartners/Transformers-Domain-Adaptation/blob/master/notebooks/GuideToTransformersDomainAdaptation.ipynb">Colab Guide</a>
