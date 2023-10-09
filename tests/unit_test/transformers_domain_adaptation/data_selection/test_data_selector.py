@@ -4,8 +4,8 @@ from hypothesis import given
 from hypothesis import strategies as st
 from transformers import AutoTokenizer, PreTrainedTokenizerFast
 
-from transformers_domain_adaptation.data_selection.data_selector import DataSelector
-from transformers_domain_adaptation.type import Corpus
+from adatation_metrics.data_selection.data_selector import DataSelector
+from adatation_metrics.type import Corpus
 
 
 @pytest.fixture(scope="session")

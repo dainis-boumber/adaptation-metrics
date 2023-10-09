@@ -1,10 +1,12 @@
 import itertools as it
 from typing import Iterable, TypeVar
 
-A = TypeVar("Any")
+from typing import TypeVar
+
+Any = TypeVar("Any")
 
 
-def batch(iterable: Iterable[A], size: int) -> Iterable[A]:
+def batch(iterable: Iterable[Any], size: int) -> Iterable[Any]:
     iters = iter(iterable)
 
     def take():

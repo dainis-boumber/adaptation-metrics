@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "transformers-domain-adaptation"
-version = "0.3.1"
+name = "adaptation-metrics"
+version = "0.3.2"
 description = "Adapt Transformer-based language models to new text domains"
 authors = ["Christopher Tee <chris@georgian.io>"]
 license = "MIT"
@@ -38,7 +38,7 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
-addopts = "--strict-markers --cov src/transformers_domain_adaptation --cov-report term-missing:skip-covered --no-cov-on-fail --cov-fail-under=75 --doctest-modules"
+addopts = "--strict-markers --cov src/adatation_metrics --cov-report term-missing:skip-covered --no-cov-on-fail --cov-fail-under=75 --doctest-modules"
 
 [tool.isort]
 profile = "black"

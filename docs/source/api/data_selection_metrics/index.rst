@@ -1,9 +1,9 @@
 .. _data-selection-metrics:
 
-transformers_domain_adaptation.data_selection.metrics
+adatation_metrics.data_selection.metrics
 =====================================================
 
-.. automodule:: transformers_domain_adaptation.data_selection.metrics
+.. automodule:: adatation_metrics.data_selection.metrics
 
 .. toctree::
     :maxdepth: 2

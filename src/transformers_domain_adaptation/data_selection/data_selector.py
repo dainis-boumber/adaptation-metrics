@@ -10,13 +10,13 @@ from sklearn.preprocessing import RobustScaler
 from tqdm import tqdm
 from transformers import PreTrainedTokenizerFast
 
-from transformers_domain_adaptation.data_selection.metrics import (
+from adatation_metrics.data_selection.metrics import (
     DIVERSITY_FEATURES,
     SIMILARITY_FEATURES,
     diversity_func_factory,
     similarity_func_factory,
 )
-from transformers_domain_adaptation.type import Corpus, Token
+from adatation_metrics.type import Corpus, Token
 
 
 class DataSelector(BaseEstimator, TransformerMixin):

@@ -1,5 +1,5 @@
-transformers_domain_adaptation.data_selection.metrics.diversity
+adatation_metrics.data_selection.metrics.diversity
 ---------------------------------------------------------------
 
-.. automodule:: transformers_domain_adaptation.data_selection.metrics.diversity
+.. automodule:: adatation_metrics.data_selection.metrics.diversity
     :members:

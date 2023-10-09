@@ -3,7 +3,7 @@
 Domain Adaptation Components
 ============================
 This page contains more details on each component of the Domain Adaptation
-framework, and example usage of ``transformers_domain_adaptation`` classes.
+framework, and example usage of ``adatation_metrics`` classes.
 
 .. image:: ../domain_adaptation_diagram.png
 
@@ -43,13 +43,13 @@ Diversity
     For the full list of similarity and diversity metrics, please refer to :ref:`Data Selection Metrics <data-selection-metrics>`.
 
 
-This toolkit provides a :class:`~transformers_domain_adaptation.DataSelector` class that encapsulates the logic above.
+This toolkit provides a :class:`~adatation_metrics.DataSelector` class that encapsulates the logic above.
 
 .. testcode:: da
 
     from pathlib import Path
 
-    from transformers_domain_adaptation import DataSelector
+    from adatation_metrics import DataSelector
 
 
     selector = DataSelector(
@@ -94,7 +94,7 @@ in order to leverage the rich pre-trained term representations of the existing v
 #. Extend :math:`V` with new terms :math:`T`.
 #. Update transformer's embedding layer's shape to account for newly added terms.
 
-The :class:`~transformers_domain_adaptation.VocabAugmentor` class is provided
+The :class:`~adatation_metrics.VocabAugmentor` class is provided
 to easily perform the procedure above.
 It finds domain-specific terms to extend an existing ``tokenizer``'s vocabulary to the ``target_vocab_size``:
 
@@ -103,7 +103,7 @@ It finds domain-specific terms to extend an existing ``tokenizer``'s vocabulary 
 
     from typing import List
 
-    from transformers_domain_adaptation import VocabAugmentor
+    from adatation_metrics import VocabAugmentor
 
 
     target_vocab_size = 31_000  # len(tokenizer) == 30_522

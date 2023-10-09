@@ -18,7 +18,7 @@ def find_hlinks(endpoint: str) -> List[str]:
     html_enc = EncodingDetector.from_declared_encoding(resp.content, is_html=True)
     enc = html_enc or http_enc
 
-    soup = BeautifulSoup(resp.content, from_encoding=encoding)
+    soup = BeautifulSoup(resp.content, from_encoding=enc)
 
     return [link["href"] for link in soup.find_all("a", href=True)]
 

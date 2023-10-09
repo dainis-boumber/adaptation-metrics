@@ -8,7 +8,7 @@ with open("README.md", encoding="utf-8") as f:
     LONG_DESCRIPTION = f.read()
 
 setup(
-    name="transformers-domain-adaptation",
+    name="adatation-metrics",
     version="0.3.2",
     description="Adapt Transformer-based language models to new text domains",
     long_description=LONG_DESCRIPTION,
@@ -17,7 +17,7 @@ setup(
     author="Christopher Tee",
     author_email="chris@georgian.io",
     license="MIT",
-    python_requires=">=3.6",
+    python_requires=">=3.9",
     keywords=[
         "transformers",
         "tokenizers",

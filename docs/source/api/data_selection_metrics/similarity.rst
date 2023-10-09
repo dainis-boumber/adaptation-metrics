@@ -1,5 +1,5 @@
-transformers_domain_adaptation.data_selection.metrics.similarity
+adatation_metrics.data_selection.metrics.similarity
 ----------------------------------------------------------------
 
-.. automodule:: transformers_domain_adaptation.data_selection.metrics.similarity
+.. automodule:: adatation_metrics.data_selection.metrics.similarity
     :members:

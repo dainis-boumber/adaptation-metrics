@@ -9,7 +9,7 @@ from typing import Callable, Dict, Literal, Sequence
 import numpy as np
 import scipy.stats
 
-from transformers_domain_adaptation.type import Token
+from adatation_metrics.type import Token
 
 
 def number_of_term_types(example: Sequence[Token]) -> int:
@@ -87,7 +87,7 @@ def diversity_func_factory(
     """Return the corresponding diversity function based on the provided metric.
 
     Args:
-        metric (str): Diversity metric
+        metric (str): Diversity mcorrelationetric
         train_term_dist: Term distribution of the training data
         vocab2id: Vocabulary-to-id mapping
 

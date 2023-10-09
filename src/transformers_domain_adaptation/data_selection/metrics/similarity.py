@@ -44,7 +44,7 @@ def jensen_shannon_divergence(repr1, repr2):
 def renyi_divergence(repr1, repr2, alpha=0.99):
     """Calculates Renyi divergence (https://en.wikipedia.org/wiki/R%C3%A9nyi_entropy#R.C3.A9nyi_divergence)."""
     repr1, repr2 = _check_input_sanity(repr1, repr2)
-    log_sum = np.power(repr1, alpha) / np.power(repr2, alpha-1).sum(axis=-1)
+    log_sum = np.sum([np.power(p, alpha) / np.power(q, alpha-1) for (p, q) in zip(repr1, repr2)])
     sim = 1 / (alpha - 1) * np.log(log_sum)
     if np.isinf(sim):
         # the similarity is -inf if no term in the document is in the vocabulary
@@ -68,14 +68,13 @@ def euclidean_similarity(repr1: np.ndarray, repr2: np.ndarray) -> np.ndarray:
     https://en.wikipedia.org/wiki/Euclidean_distance
     """
     repr1, repr2 = _check_input_sanity(repr1, repr2)
-    euclidean_distance = np.sqrt(((repr1 - repr2) ** 2).sum(axis=-1))
-    return 1.0 - euclidean_distance
+    sim = np.sqrt(np.sum([np.power(p-q, 2) for (p, q) in zip(repr1, repr2)]))
+    return sim
 
 
 def manhattan(repr1, repr2):
     repr1, repr2 = _check_input_sanity(repr1, repr2)
-    """Also known as L1 or Manhattan distance (https://en.wikipedia.org/wiki/Taxicab_geometry)."""
-    sim = scipy.spatial.distance.cityblock(repr1, repr2)
+    sim = np.sum([np.abs(p-q) for (p, q) in zip(repr1, repr2)])
     return sim
 
 def kl_divergence(repr1, repr2):
@@ -87,13 +86,12 @@ def kl_divergence(repr1, repr2):
 def bhattacharyya_similarity(repr1, repr2):
     repr1, repr2 = _check_input_sanity(repr1, repr2)
     """Calculates Bhattacharyya distance (https://en.wikipedia.org/wiki/Bhattacharyya_distance)."""
-    distance = -np.log(np.sqrt(repr1 * repr2).sum(axis=-1))
-    if np.isnan(distance):
-        raise ArithmeticError('Error: Similarity is nan.')
-    if np.isinf(distance):
+    sim = - np.log(np.sum([np.sqrt(p*q) for (p, q) in zip(repr1, repr2)]))
+    assert not np.isnan(sim), 'Error: Similarity is nan.'
+    if np.isinf(sim):
         # the similarity is -inf if no term in the review is in the vocabulary
         return 0
-    return distance
+    return sim
 
 ############################
 ##### Function factory #####
@@ -105,6 +103,8 @@ SimilarityMetric = Literal[
     "euclidean",
     "variational",
     "bhattacharyya",
+    "entropy",
+    "correlation",
 ]
 SimilarityFunc = Callable[[np.ndarray, np.ndarray], np.ndarray]
 SIMILARITY_FEATURES = {
@@ -115,6 +115,7 @@ SIMILARITY_FEATURES = {
     "variational",
     "bhattacharyya",
     "entropy",
+    "correlation",
 }
 
 

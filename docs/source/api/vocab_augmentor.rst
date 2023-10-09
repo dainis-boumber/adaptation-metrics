@@ -1,5 +1,5 @@
-transformers_domain_adaptation.VocabAugmentor
+adatation_metrics.VocabAugmentor
 =============================================
 
-.. autoclass:: transformers_domain_adaptation.VocabAugmentor
+.. autoclass:: adatation_metrics.VocabAugmentor
     :members:

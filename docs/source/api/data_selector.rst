@@ -1,5 +1,5 @@
-transformers_domain_adaptation.DataSelector
+adatation_metrics.DataSelector
 ===========================================
 
-.. autoclass:: transformers_domain_adaptation.DataSelector
+.. autoclass:: adatation_metrics.DataSelector
     :members:
