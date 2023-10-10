@@ -10,15 +10,15 @@ Let's try to keep it as close as possible to the original regarding API calls.
 Whatever is under this ine is not my responsibility :)))
 
 <p align="center">
-    <a href="https://adatation-metrics.readthedocs.io/en/latest/content/introduction.html">Documentation</a> •
+    <a href="https://adaptation-metrics.readthedocs.io/en/latest/content/introduction.html">Documentation</a> •
     <a href="https://colab.research.google.com/github/georgianpartners/Transformers-Domain-Adaptation/blob/master/notebooks/GuideToTransformersDomainAdaptation.ipynb">Colab Guide</a>
 </p>
-
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/adatation-metrics)](https://pypi.org/project/adatation-metrics/)
-[![PyPI version](https://badge.fury.io/py/adatation-metrics.svg)](https://badge.fury.io/py/adatation-metrics)
+tion-metrics.svg)](https://badge.fury.io/py/adaptation-metrics)
 ![Python package](https://github.com/georgianpartners/Transformers-Domain-Adaptation/workflows/Python%20package/badge.svg)
-[![Documentation Status](https://readthedocs.org/projects/adatation-metrics/badge/?version=latest)](https://adatation-metrics.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/adaptation-metrics/badge/?version=latest)](https://adaptation-metrics.readthedocs.io/en/latest/?badge=latest)
 
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/adaptation-metrics)](https://pypi.org/project/adaptation-metrics/)
+[![PyPI version](https://badge.fury.io/py/adapta
 </div>
 
 This toolkit improves the performance of HuggingFace transformer models on downstream NLP tasks,
@@ -42,13 +42,13 @@ This toolkit provides two classes, `DataSelector` and `VocabAugmentor`, to simpl
 ## Installation
 This package was developed on Python 3.6+ and can be downloaded using `pip`:
 ```
-pip install adatation-metrics
+pip install adaptation-metrics
 ```
 
 ## Features
 - Compatible with the HuggingFace ecosystem:
     - `transformers 4.x`
-    - `tokenizers`
+    - `tokenizers`dataset
     - `datasets`
 
 ## Usage

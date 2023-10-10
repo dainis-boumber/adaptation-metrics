@@ -15,7 +15,7 @@ from tokenizers.normalizers import Lowercase
 from tokenizers.pre_tokenizers import Whitespace
 from transformers import PreTrainedTokenizerFast
 
-from adatation_metrics.type import Corpus, Token
+from adaptation_metrics.type import Corpus, Token
 
 
 class VocabAugmentor(BaseEstimator):

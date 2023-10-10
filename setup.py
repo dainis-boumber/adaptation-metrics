@@ -8,8 +8,8 @@ with open("README.md", encoding="utf-8") as f:
     LONG_DESCRIPTION = f.read()
 
 setup(
-    name="adatation-metrics",
-    version="0.3.2",
+    name="adaptation-metrics",
+    version="0.4.0",
     description="Adapt Transformer-based language models to new text domains",
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
@@ -17,7 +17,7 @@ setup(
     author="Christopher Tee",
     author_email="chris@georgian.io",
     license="MIT",
-    python_requires=">=3.9",
+    python_requires=">=3.11.5",
     keywords=[
         "transformers",
         "tokenizers",
@@ -34,6 +34,9 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "License :: OSI Approved :: MIT License",
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
         "Topic :: Text Processing :: General",
@@ -43,17 +46,19 @@ setup(
         where="src", exclude=("etl*", "utils*", "experimental*", "tests")
     ),
     install_requires=[
-        "transformers>=4.33",
-        "tokenizers>=0.9",
-        "datasets>=1.2",
+        "transformers",
+        "tokenizers",
+        "datasets",
         "pandas",
-        "torch",
-        "scipy==1.5.4",
+        "scipy>=1.5.4",
         "scikit-learn",
         "tqdm",
         "huggingface-hub",
         "jupyter",
         "notebook",
         "sentencepiece",
+        "boto3",
+        "pytest",
+        "cchardet",
     ],
 )

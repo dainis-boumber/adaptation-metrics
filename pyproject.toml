@@ -1,24 +1,23 @@
 [tool.poetry]
 name = "adaptation-metrics"
-version = "0.3.2"
+version = "0.4.0"
 description = "Adapt Transformer-based language models to new text domains"
 authors = ["Christopher Tee <chris@georgian.io>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.8,<3.12"
+python = "^3.9,<3.12"
 transformers = "^4.0.0"
-tokenizers = "^0.12.0"
+tokenizers = "^0.14.0"
 datasets = "^2.4.0"
 pandas = "^1.4.0"
-tqdm = "^4.49.0"
-torch = "^1.12.0"
-scikit-learn = "^1.1.0"
 scipy = "^1.9.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
-pytest-cov = "^3.0.0"
+tqdm = "^4.49.0"
+torch = "^2.0.0"
+scikit-learn = "^3.0.0"
 pytest-xdist = "^2.5.0"
 hypothesis = "^6.54.4"
 mypy = "^0.971"
@@ -38,7 +37,7 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
-addopts = "--strict-markers --cov src/adatation_metrics --cov-report term-missing:skip-covered --no-cov-on-fail --cov-fail-under=75 --doctest-modules"
+addopts = "--strict-markers --cov src/adaptation_metrics --cov-report term-missing:skip-covered --no-cov-on-fail --cov-fail-under=75 --doctest-modules"
 
 [tool.isort]
 profile = "black"

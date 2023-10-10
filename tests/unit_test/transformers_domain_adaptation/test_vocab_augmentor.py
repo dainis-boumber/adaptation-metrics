@@ -6,8 +6,8 @@ from typing import IO
 import pytest
 from transformers import AutoTokenizer, PreTrainedTokenizerFast
 
-from adatation_metrics.type import Corpus
-from adatation_metrics.vocab_augmentor import VocabAugmentor
+from adaptation_metrics.type import Corpus
+from adaptation_metrics.vocab_augmentor import VocabAugmentor
 
 TOKENIZERS_TO_TEST = ("bert-base-uncased", "bert-base-cased", "roberta-base")
 

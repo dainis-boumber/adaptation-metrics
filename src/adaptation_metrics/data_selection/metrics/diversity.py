@@ -9,8 +9,7 @@ from typing import Callable, Dict, Literal, Sequence
 import numpy as np
 import scipy.stats
 
-from adatation_metrics.type import Token
-
+from adaptation_metrics.type import Token
 
 def number_of_term_types(example: Sequence[Token]) -> int:
     """Count the number of term types of the example."""

@@ -104,7 +104,6 @@ SimilarityMetric = Literal[
     "variational",
     "bhattacharyya",
     "entropy",
-    "correlation",
 ]
 SimilarityFunc = Callable[[np.ndarray, np.ndarray], np.ndarray]
 SIMILARITY_FEATURES = {
@@ -115,7 +114,6 @@ SIMILARITY_FEATURES = {
     "variational",
     "bhattacharyya",
     "entropy",
-    "correlation",
 }
 
 
