@@ -100,6 +100,8 @@ SimilarityMetric = Literal[
     "euclidean",
     "variational",
     "bhattacharyya",
+    "kl_divergence",
+
 ]
 SimilarityFunc = Callable[[np.ndarray, np.ndarray], np.ndarray]
 SIMILARITY_FEATURES = {
@@ -109,6 +111,7 @@ SIMILARITY_FEATURES = {
     "euclidean",
     "variational",
     "bhattacharyya",
+    "kl_divergence",
 }
 
 
@@ -131,6 +134,7 @@ def similarity_func_factory(metric: SimilarityMetric) -> SimilarityFunc:
         "euclidean": euclidean_similarity,
         "variational": manhattan,
         "bhattacharyya": bhattacharyya_similarity,
+        "kl_divergence": kl_divergence,
     }
 
     similarity_function = mapping[metric]
