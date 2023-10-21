@@ -97,13 +97,12 @@ class DataSelector(BaseEstimator, TransformerMixin):
 
     def to_term_dist_batch(self, texts: Sequence[str]) -> np.ndarray:
         # * Assumption: Token ID 0 is a special token id and never appears in tokenization with `add_special_tokens=False`
-        
+        encoded_texts = [enc for enc in self.tokenizer(
+                texts, add_special_tokens=False
+            )]
         # Tokenize all documents using Rust tokenizer
         counters: List[CounterType[int]] = [
-            Counter(enc.ids)
-            for enc in self.tokenizer.encode(
-                texts, add_special_tokens=False
-            )
+            Counter(enc.input_ids) for enc in encoded_texts
         ]
 
 
