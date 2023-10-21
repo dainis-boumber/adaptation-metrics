@@ -9,7 +9,7 @@ with open("README.md", encoding="utf-8") as f:
 
 setup(
     name="adaptation-metrics",
-    version="0.4.0",
+    version="0.4.1",
     description="Adapt Transformer-based language models to new text domains",
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
@@ -17,7 +17,7 @@ setup(
     author="Christopher Tee",
     author_email="chris@georgian.io",
     license="MIT",
-    python_requires=">=3.11.5",
+    python_requires=">=3.12.0",
     keywords=[
         "transformers",
         "tokenizers",
@@ -46,10 +46,13 @@ setup(
         where="src", exclude=("etl*", "utils*", "experimental*", "tests")
     ),
     install_requires=[
-        "transformers",
-        "tokenizers",
-        "datasets",
+        "poetry>=1.0.0"
+        "transformers>=4.27.0",
+        "tokenizers=0.12.0",
+        "datasets>=1.2.1",
         "pandas",
+        "pyarrow==12.0.1",
+        "cchardet==2.1.7",
         "scipy>=1.5.4",
         "scikit-learn",
         "tqdm",
@@ -59,6 +62,6 @@ setup(
         "sentencepiece",
         "boto3",
         "pytest",
-        "cchardet",
+        "pylance",
     ],
 )

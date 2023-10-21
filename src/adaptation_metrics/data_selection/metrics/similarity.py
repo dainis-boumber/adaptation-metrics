@@ -17,10 +17,8 @@ def _check_input_sanity(repr1:np.ndarray, repr2:np.ndarray):
     """Check that the input representations are not empty."""
     if repr1 is None or repr2 is None:
         raise ValueError("Input representations must not be None.")
-    if pd.isna(repr1).any() or pd.isna(repr2).any():
-        raise ValueError("Input representations must not be NaN.")
-    if np.isinf(repr1).any() or np.isinf(repr2).any():
-        raise ValueError("Input representations must not be inf.")
+    if pd.isnull(repr1).any() or pd.isnull(repr2).any():
+        raise ValueError("Input representations must not be null.")
     if repr1.size == 0 or repr2.size == 0:
         raise ValueError("Input representations must not be empty.")
     if repr1.size == 1 and repr2.size > 1:
@@ -35,7 +33,7 @@ def jensen_shannon_divergence(repr1, repr2):
     repr1, repr2 = _check_input_sanity(repr1, repr2)
     avg_repr = 0.5 * (repr1 + repr2)
     sim = 1 - 0.5 * (scipy.stats.entropy(repr1, avg_repr) + scipy.stats.entropy(repr2, avg_repr))
-    if np.isinf(sim):
+    if np.isfinite(sim).all() == False:
         # the similarity is -inf if no term in the document is in the vocabulary
         return 0
     return sim
@@ -46,7 +44,7 @@ def renyi_divergence(repr1, repr2, alpha=0.99):
     repr1, repr2 = _check_input_sanity(repr1, repr2)
     log_sum = np.sum([np.power(p, alpha) / np.power(q, alpha-1) for (p, q) in zip(repr1, repr2)])
     sim = 1 / (alpha - 1) * np.log(log_sum)
-    if np.isinf(sim):
+    if np.isfinite(sim).all() == False:
         # the similarity is -inf if no term in the document is in the vocabulary
         return 0
     return sim
@@ -56,7 +54,7 @@ def cosine_similarity(repr1, repr2):
     """Calculates cosine similarity (https://en.wikipedia.org/wiki/Cosine_similarity)."""
     repr1, repr2 = _check_input_sanity(repr1, repr2)
     sim = 1 - scipy.spatial.distance.cosine(repr1, repr2)
-    if np.isnan(sim):
+    if np.isfinite(sim).all() == False:
         # the similarity is nan if no term in the document is in the vocabulary
         return 0
     return sim
@@ -87,8 +85,7 @@ def bhattacharyya_similarity(repr1, repr2):
     repr1, repr2 = _check_input_sanity(repr1, repr2)
     """Calculates Bhattacharyya distance (https://en.wikipedia.org/wiki/Bhattacharyya_distance)."""
     sim = - np.log(np.sum([np.sqrt(p*q) for (p, q) in zip(repr1, repr2)]))
-    assert not np.isnan(sim), 'Error: Similarity is nan.'
-    if np.isinf(sim):
+    if np.isnan(sim).any():
         # the similarity is -inf if no term in the review is in the vocabulary
         return 0
     return sim
@@ -103,7 +100,6 @@ SimilarityMetric = Literal[
     "euclidean",
     "variational",
     "bhattacharyya",
-    "entropy",
 ]
 SimilarityFunc = Callable[[np.ndarray, np.ndarray], np.ndarray]
 SIMILARITY_FEATURES = {
@@ -113,7 +109,6 @@ SIMILARITY_FEATURES = {
     "euclidean",
     "variational",
     "bhattacharyya",
-    "entropy",
 }
 
 
@@ -136,7 +131,6 @@ def similarity_func_factory(metric: SimilarityMetric) -> SimilarityFunc:
         "euclidean": euclidean_similarity,
         "variational": manhattan,
         "bhattacharyya": bhattacharyya_similarity,
-        "entropy": kl_divergence,
     }
 
     similarity_function = mapping[metric]

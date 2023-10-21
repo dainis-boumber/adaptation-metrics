@@ -1,14 +1,16 @@
 [tool.poetry]
 name = "adaptation-metrics"
-version = "0.4.0"
+version = "0.4.1"
 description = "Adapt Transformer-based language models to new text domains"
 authors = ["Christopher Tee <chris@georgian.io>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.9,<3.12"
-transformers = "^4.0.0"
-tokenizers = "^0.14.0"
+python = "^3.9,<3.15"
+transformers = "^4.31.0"
+tokenizers = "^0.13.0"
+pyarrow = "^12.0.1"
+cchardet = "^2.1.7"
 datasets = "^2.4.0"
 pandas = "^1.4.0"
 scipy = "^1.9.0"

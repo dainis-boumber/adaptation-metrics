@@ -8,23 +8,25 @@ from scipy import sparse
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import RobustScaler
 from tqdm import tqdm
-from transformers import PreTrainedTokenizerFast
+
+from transformers import PreTrainedTokenizerFast    
 
 from adaptation_metrics.data_selection.metrics import (
     DIVERSITY_FEATURES,
     SIMILARITY_FEATURES,
     diversity_func_factory,
     similarity_func_factory,
+    similarity_func_factory,
 )
 from adaptation_metrics.type import Corpus, Token
 
+from adaptation_metrics.type import Corpus, Token
 
 class DataSelector(BaseEstimator, TransformerMixin):
     """Select subset of data that is likely to be beneficial for domain pre-training.
 
     This class is sklearn-compatible and implements the sklearn Transformers interface.
     """
-    _last_scores : pd.DataFrame = None
 
     def __init__(
         self,
@@ -41,7 +43,7 @@ class DataSelector(BaseEstimator, TransformerMixin):
             tokenizer: A Rust-based 🤗 Tokenizer
             similarity_metrics: An optional list of similarity metrics
             diversity_metrics: An optional list of diversity metrics
-
+.tolist()
         Note:
             For a list of similarity and diversity metrics, refer to :ref:`data-selection-metrics`
 
@@ -75,11 +77,7 @@ class DataSelector(BaseEstimator, TransformerMixin):
         self.tokenizer = tokenizer
         self.similarity_metrics = similarity_metrics
         self.diversity_metrics = diversity_metrics
-        self._last_scores  = None
 
-    def get_last_scores(self):
-        return self._last_scores
-    
     def to_term_dist(self, text: str) -> np.ndarray:
         if not len(text.strip()):
             raise ValueError(f"A non-empty string must be provided.")
@@ -99,14 +97,15 @@ class DataSelector(BaseEstimator, TransformerMixin):
 
     def to_term_dist_batch(self, texts: Sequence[str]) -> np.ndarray:
         # * Assumption: Token ID 0 is a special token id and never appears in tokenization with `add_special_tokens=False`
-
+        
         # Tokenize all documents using Rust tokenizer
         counters: List[CounterType[int]] = [
             Counter(enc.ids)
-            for enc in self.tokenizer.backend_tokenizer.encode_batch(
+            for enc in self.tokenizer.encode(
                 texts, add_special_tokens=False
             )
         ]
+
 
         rows = np.array(
             [val for i, counter in enumerate(counters) for val in [i] * len(counter)]
@@ -145,6 +144,7 @@ class DataSelector(BaseEstimator, TransformerMixin):
         Args:
             docs: The training corpus
 
+            
         Returns:
             A subset of relevant :obj:`docs` for domain pre-training
         """
@@ -173,7 +173,6 @@ class DataSelector(BaseEstimator, TransformerMixin):
             RobustScaler().fit_transform(scores), columns=scores.columns
         )
         scores["composite"] = scores.sum(axis=1)
-        self._last_scores = scores.copy()
         return scores
 
     def compute_similarities(self, docs: Corpus) -> pd.DataFrame:
@@ -183,7 +182,7 @@ class DataSelector(BaseEstimator, TransformerMixin):
         ):  # Short-circuit function to avoid unnecessary computations
             return similarities
 
-        term_dists = np.array([self.to_term_dist(doc) for doc in docs])
+        term_dists = self.to_term_dist_batch(docs)
 
         pbar = tqdm(
             self.similarity_metrics,
